@@ -1,15 +1,15 @@
 package com.hopsoft.brew.ingredients.domain;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
-public class Grain {
+public abstract class Grain {
 
-    @Id
-    private String id;
+    private String grainType;
 
-    private String grainName;
+    public String getGrainType() {
+        return grainType;
+    }
 
-
+    public void setGrainType(String grainType){
+        this.grainType=grainType;
+    }
 }
