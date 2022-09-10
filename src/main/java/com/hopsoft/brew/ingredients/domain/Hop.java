@@ -1,7 +1,6 @@
-package com.hopsoft.brew.ingredients;
+package com.hopsoft.brew.ingredients.domain;
 
 
-import com.hopsoft.brew.ingredients.enums.HopType;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -15,13 +14,13 @@ public class Hop {
 
     private double alphaAcidPercent;
 
-    private HopType hopType;
+    private String hopType;
 
     private boolean noble;
 
-    public Hop(){};
+    public Hop() {};
 
-    public Hop(String hopName, double alphaAcidPercent, HopType hopType, boolean noble) {
+    public Hop(String hopName, double alphaAcidPercent, String hopType, boolean noble) {
         this.hopName = hopName;
         this.alphaAcidPercent = alphaAcidPercent;
         this.hopType = hopType;
@@ -53,10 +52,10 @@ public class Hop {
     }
 
     public String getHopType() {
-        return hopType.getHopType();
+        return hopType;
     }
 
-    public void setHopType(HopType hopType) {
+    public void setHopType(String hopType) {
         this.hopType = hopType;
     }
 
@@ -74,7 +73,7 @@ public class Hop {
                 "id='" + id + '\'' +
                 ", hopName='" + hopName + '\'' +
                 ", alphaAcidPercent=" + alphaAcidPercent +
-                ", hopType='" + hopType.getHopType() + '\'' +
+                ", hopType='" + hopType + '\'' +
                 ", noble=" + noble +
                 '}';
     }

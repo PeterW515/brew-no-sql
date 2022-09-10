@@ -1,8 +1,5 @@
-package com.hopsoft.brew.ingredients;
+package com.hopsoft.brew.ingredients.domain;
 
-import com.hopsoft.brew.ingredients.enums.Level;
-import com.hopsoft.brew.ingredients.enums.YeastForm;
-import com.hopsoft.brew.ingredients.enums.YeastType;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -14,17 +11,17 @@ public class Yeast {
 
     private String yeastName;
 
-    private Level attenuation;
+    private String attenuation;
 
-    private Level floculation;
+    private String floculation;
 
-    private YeastForm yeastForm;
+    private String yeastForm;
 
-    private YeastType yeastType;
+    private String yeastType;
 
     public Yeast(){};
 
-    public Yeast(String yeastName, Level attenuation, Level floculation, YeastForm yeastForm, YeastType yeastType){
+    public Yeast(String yeastName, String attenuation, String floculation, String yeastForm, String yeastType){
         this.yeastName =yeastName;
         this.attenuation=attenuation;
         this.floculation=floculation;
@@ -48,35 +45,35 @@ public class Yeast {
         this.yeastName = yeastName;
     }
 
-    public Level getAttenuation() {
+    public String getAttenuation() {
         return attenuation;
     }
 
-    public void setAttenuation(Level attenuation) {
+    public void setAttenuation(String attenuation) {
         this.attenuation = attenuation;
     }
 
-    public Level getFloculation() {
+    public String getFloculation() {
         return floculation;
     }
 
-    public void setFloculation(Level floculation) {
+    public void setFloculation(String floculation) {
         this.floculation = floculation;
     }
 
-    public YeastForm getYeastForm() {
+    public String getYeastForm() {
         return yeastForm;
     }
 
-    public void setYeastForm(YeastForm yeastForm) {
+    public void setYeastForm(String yeastForm) {
         this.yeastForm = yeastForm;
     }
 
-    public YeastType getYeastType() {
+    public String getYeastType() {
         return yeastType;
     }
 
-    public void setYeastType(YeastType yeastType) {
+    public void setYeastType(String yeastType) {
         this.yeastType = yeastType;
     }
 
@@ -85,10 +82,10 @@ public class Yeast {
         return "Yeast{" +
                 "id='" + id + '\'' +
                 ", yeastName='" + yeastName + '\'' +
-                ", attenuation=" + attenuation.getLevel() +
-                ", floculation=" + floculation.getLevel() +
-                ", yeastForm=" + yeastForm.getYeastForm() +
-                ", yeastType=" + yeastType.getYeastType() +
+                ", attenuation=" + attenuation +
+                ", floculation=" + floculation +
+                ", yeastForm=" + yeastForm +
+                ", yeastType=" + yeastType +
                 '}';
     }
 }
