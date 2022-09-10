@@ -4,6 +4,9 @@ package com.hopsoft.brew.ingredients.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Map;
+import java.util.Objects;
+
 @Document
 public class Hop {
 
@@ -12,19 +15,31 @@ public class Hop {
 
     private String hopName;
 
-    private double alphaAcidPercent;
+    private double alphaAcidLowerBound;
 
-    private String hopType;
+    private double alphaAcidUpperBound;
+
+    private double nominalAlphaAcidPercent;
+
+    private String hopPurpose;
 
     private boolean noble;
 
+    private double hopStorageIndex;
+
+    private Map<String, Double> flavorProfile;
+
     public Hop() {};
 
-    public Hop(String hopName, double alphaAcidPercent, String hopType, boolean noble) {
+    public Hop(String hopName, double alphaAcidLowerBound, double alphaAcidUpperBound, double nominalAlphaAcidPercent, String hopPurpose, boolean noble, double hopStorageIndex, Map<String, Double> flavorProfile) {
         this.hopName = hopName;
-        this.alphaAcidPercent = alphaAcidPercent;
-        this.hopType = hopType;
+        this.alphaAcidLowerBound = alphaAcidLowerBound;
+        this.alphaAcidUpperBound = alphaAcidUpperBound;
+        this.nominalAlphaAcidPercent = nominalAlphaAcidPercent;
+        this.hopPurpose = hopPurpose;
         this.noble = noble;
+        this.hopStorageIndex = hopStorageIndex;
+        this.flavorProfile = flavorProfile;
     }
 
     public String getId() {
@@ -43,20 +58,36 @@ public class Hop {
         this.hopName = hopName;
     }
 
-    public double getAlphaAcidPercent() {
-        return alphaAcidPercent;
+    public double getAlphaAcidLowerBound() {
+        return alphaAcidLowerBound;
     }
 
-    public void setAlphaAcidPercent(double alphaAcidPercent) {
-        this.alphaAcidPercent = alphaAcidPercent;
+    public void setAlphaAcidLowerBound(double alphaAcidLowerBound) {
+        this.alphaAcidLowerBound = alphaAcidLowerBound;
     }
 
-    public String getHopType() {
-        return hopType;
+    public double getAlphaAcidUpperBound() {
+        return alphaAcidUpperBound;
     }
 
-    public void setHopType(String hopType) {
-        this.hopType = hopType;
+    public void setAlphaAcidUpperBound(double alphaAcidUpperBound) {
+        this.alphaAcidUpperBound = alphaAcidUpperBound;
+    }
+
+    public double getNominalAlphaAcidPercent() {
+        return nominalAlphaAcidPercent;
+    }
+
+    public void setNominalAlphaAcidPercent(double nominalAlphaAcidPercent) {
+        this.nominalAlphaAcidPercent = nominalAlphaAcidPercent;
+    }
+
+    public String getHopPurpose() {
+        return hopPurpose;
+    }
+
+    public void setHopPurpose(String hopPurpose) {
+        this.hopPurpose = hopPurpose;
     }
 
     public boolean isNoble() {
@@ -67,14 +98,47 @@ public class Hop {
         this.noble = noble;
     }
 
+    public double getHopStorageIndex() {
+        return hopStorageIndex;
+    }
+
+    public void setHopStorageIndex(double hopStorageIndex) {
+        this.hopStorageIndex = hopStorageIndex;
+    }
+
+    public Map<String, Double> getFlavorProfile() {
+        return flavorProfile;
+    }
+
+    public void setFlavorProfile(Map<String, Double> flavorProfile) {
+        this.flavorProfile = flavorProfile;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Hop hop = (Hop) o;
+        return noble == hop.noble && hopName.equals(hop.hopName) && Objects.equals(hopPurpose, hop.hopPurpose);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(hopName, hopPurpose, noble);
+    }
+
     @Override
     public String toString() {
         return "Hop{" +
                 "id='" + id + '\'' +
                 ", hopName='" + hopName + '\'' +
-                ", alphaAcidPercent=" + alphaAcidPercent +
-                ", hopType='" + hopType + '\'' +
+                ", alphaAcidLowerBound=" + alphaAcidLowerBound +
+                ", alphaAcidUpperBound=" + alphaAcidUpperBound +
+                ", nominalAlphaAcidPercent=" + nominalAlphaAcidPercent +
+                ", hopPurpose='" + hopPurpose + '\'' +
                 ", noble=" + noble +
+                ", hopStorageIndex=" + hopStorageIndex +
+                ", flavorProfile=" + flavorProfile +
                 '}';
     }
 }
