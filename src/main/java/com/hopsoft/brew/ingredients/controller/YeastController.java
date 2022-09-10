@@ -40,7 +40,7 @@ public class YeastController {
         return CollectionModel.of(yeasts, linkTo(methodOn(YeastController.class).getAll()).withSelfRel());
     }
 
-    @GetMapping(path = "/yeast/{id}")
+    @GetMapping(path = "/yeastId/{id}")
     public @ResponseBody
     EntityModel<Yeast> getOne(@PathVariable String id) {
         Yeast yeast = yeastService.findByYeastId(id).orElseThrow(() -> new YeastNotFoundException(id));

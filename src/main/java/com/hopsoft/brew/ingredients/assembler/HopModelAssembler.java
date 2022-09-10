@@ -4,10 +4,12 @@ import com.hopsoft.brew.ingredients.controller.HopController;
 import com.hopsoft.brew.ingredients.domain.Hop;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
+import org.springframework.stereotype.Component;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
+@Component
 public class HopModelAssembler implements RepresentationModelAssembler<Hop, EntityModel<Hop>> {
     @Override
     public EntityModel<Hop> toModel(Hop hop){

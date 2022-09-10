@@ -40,7 +40,7 @@ public class HopController {
         return CollectionModel.of(hops, linkTo(methodOn(HopController.class).getAll()).withSelfRel());
     }
 
-    @GetMapping(path = "/hop/{id}")
+    @GetMapping(path = "/hopId/{id}")
     public @ResponseBody
     EntityModel<Hop> getOne(@PathVariable String id) {
         Hop hop = hopService.findByHopId(id).orElseThrow(() -> new HopNotFoundException(id));
