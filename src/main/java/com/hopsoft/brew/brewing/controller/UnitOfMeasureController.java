@@ -20,7 +20,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
-@RequestMapping("/api/ingredients/unitsOfMeasure")
+@RequestMapping("/api/brewing/unitsOfMeasure")
 public class UnitOfMeasureController {
     private static final Logger logger = LoggerFactory.getLogger(UnitOfMeasureController.class);
 

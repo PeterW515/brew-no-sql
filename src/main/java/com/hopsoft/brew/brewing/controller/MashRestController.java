@@ -20,7 +20,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
-@RequestMapping("/api/ingredients/mashRests")
+@RequestMapping("/api/brewing/mashRests")
 public class MashRestController {
     private static final Logger logger = LoggerFactory.getLogger(MashRestController.class);
 

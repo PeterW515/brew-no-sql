@@ -20,7 +20,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
-@RequestMapping("/api/ingredients/yeastLines")
+@RequestMapping("/api/brewing/yeastLines")
 public class YeastLineController {
     private static final Logger logger = LoggerFactory.getLogger(YeastLineController.class);
 
