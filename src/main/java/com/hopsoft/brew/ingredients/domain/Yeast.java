@@ -1,5 +1,8 @@
 package com.hopsoft.brew.ingredients.domain;
 
+import com.hopsoft.brew.ingredients.enums.Level;
+import com.hopsoft.brew.ingredients.enums.YeastForm;
+import com.hopsoft.brew.ingredients.enums.YeastType;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -13,13 +16,13 @@ public class Yeast {
 
     private String yeastName;
 
-    private String attenuation;
+    private Level attenuation;
 
-    private String floculation;
+    private Level floculation;
 
-    private String yeastForm;
+    private YeastForm yeastForm;
 
-    private String yeastType;
+    private YeastType yeastType;
 
     private Double alcoholTolerance;
 
@@ -37,7 +40,7 @@ public class Yeast {
 
     public Yeast(){};
 
-    public Yeast(String yeastName, String attenuation, String floculation, String yeastForm, String yeastType, Double alcoholTolerance, Double attenuationLowerBound, Double attenuationUpperBound, Double nominalAttenuationPercent, Double temperatureLowerBound, Double temperatureUpperBound, Double nominalTemperature) {
+    public Yeast(String yeastName, Level attenuation, Level floculation, YeastForm yeastForm, YeastType yeastType, Double alcoholTolerance, Double attenuationLowerBound, Double attenuationUpperBound, Double nominalAttenuationPercent, Double temperatureLowerBound, Double temperatureUpperBound, Double nominalTemperature) {
         this.yeastName = yeastName;
         this.attenuation = attenuation;
         this.floculation = floculation;
@@ -68,35 +71,35 @@ public class Yeast {
         this.yeastName = yeastName;
     }
 
-    public String getAttenuation() {
+    public Level getAttenuation() {
         return attenuation;
     }
 
-    public void setAttenuation(String attenuation) {
+    public void setAttenuation(Level attenuation) {
         this.attenuation = attenuation;
     }
 
-    public String getFloculation() {
+    public Level getFloculation() {
         return floculation;
     }
 
-    public void setFloculation(String floculation) {
+    public void setFloculation(Level floculation) {
         this.floculation = floculation;
     }
 
-    public String getYeastForm() {
+    public YeastForm getYeastForm() {
         return yeastForm;
     }
 
-    public void setYeastForm(String yeastForm) {
+    public void setYeastForm(YeastForm yeastForm) {
         this.yeastForm = yeastForm;
     }
 
-    public String getYeastType() {
+    public YeastType getYeastType() {
         return yeastType;
     }
 
-    public void setYeastType(String yeastType) {
+    public void setYeastType(YeastType yeastType) {
         this.yeastType = yeastType;
     }
 

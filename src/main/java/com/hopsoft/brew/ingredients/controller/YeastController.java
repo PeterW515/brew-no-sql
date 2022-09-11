@@ -1,7 +1,6 @@
 package com.hopsoft.brew.ingredients.controller;
 
 import com.hopsoft.brew.ingredients.assembler.YeastModelAssembler;
-import com.hopsoft.brew.ingredients.domain.Hop;
 import com.hopsoft.brew.ingredients.domain.Yeast;
 import com.hopsoft.brew.ingredients.exception.YeastNotFoundException;
 import com.hopsoft.brew.ingredients.service.api.YeastService;

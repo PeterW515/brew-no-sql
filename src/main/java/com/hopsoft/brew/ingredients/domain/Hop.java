@@ -1,6 +1,7 @@
 package com.hopsoft.brew.ingredients.domain;
 
 
+import com.hopsoft.brew.ingredients.enums.HopPurpose;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -21,7 +22,7 @@ public class Hop {
 
     private double nominalAlphaAcidPercent;
 
-    private String hopPurpose;
+    private HopPurpose hopPurpose;
 
     private boolean noble;
 
@@ -31,7 +32,7 @@ public class Hop {
 
     public Hop() {};
 
-    public Hop(String hopName, double alphaAcidLowerBound, double alphaAcidUpperBound, double nominalAlphaAcidPercent, String hopPurpose, boolean noble, double hopStorageIndex, Map<String, Double> flavorProfile) {
+    public Hop(String hopName, double alphaAcidLowerBound, double alphaAcidUpperBound, double nominalAlphaAcidPercent, HopPurpose hopPurpose, boolean noble, double hopStorageIndex, Map<String, Double> flavorProfile) {
         this.hopName = hopName;
         this.alphaAcidLowerBound = alphaAcidLowerBound;
         this.alphaAcidUpperBound = alphaAcidUpperBound;
@@ -82,11 +83,11 @@ public class Hop {
         this.nominalAlphaAcidPercent = nominalAlphaAcidPercent;
     }
 
-    public String getHopPurpose() {
+    public HopPurpose getHopPurpose() {
         return hopPurpose;
     }
 
-    public void setHopPurpose(String hopPurpose) {
+    public void setHopPurpose(HopPurpose hopPurpose) {
         this.hopPurpose = hopPurpose;
     }
 

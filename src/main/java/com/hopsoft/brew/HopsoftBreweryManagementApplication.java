@@ -1,8 +1,15 @@
 package com.hopsoft.brew;
 
+import com.hopsoft.brew.brewing.domain.*;
+import com.hopsoft.brew.brewing.enums.*;
+import com.hopsoft.brew.brewing.repository.*;
 import com.hopsoft.brew.ingredients.domain.Hop;
 import com.hopsoft.brew.ingredients.domain.Malt;
 import com.hopsoft.brew.ingredients.domain.WaterProfile;
+import com.hopsoft.brew.ingredients.enums.HopPurpose;
+import com.hopsoft.brew.ingredients.enums.Level;
+import com.hopsoft.brew.ingredients.enums.YeastForm;
+import com.hopsoft.brew.ingredients.enums.YeastType;
 import com.hopsoft.brew.ingredients.repository.HopRepository;
 import com.hopsoft.brew.ingredients.domain.Yeast;
 import com.hopsoft.brew.ingredients.repository.MaltRepository;
@@ -17,8 +24,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @SpringBootApplication
 @ComponentScan
@@ -32,11 +38,26 @@ public class HopsoftBreweryManagementApplication {
 	}
 
 	@Bean
-	public CommandLineRunner init(HopRepository hopRepository, YeastRepository yeastRepository, MaltRepository maltRepository, WaterProfileRepository waterProfileRepository){
+	public CommandLineRunner init(HopRepository hopRepository, YeastRepository yeastRepository,
+								  MaltRepository maltRepository,
+								  WaterProfileRepository waterProfileRepository,
+								  FermentationScheduleRepository fermentationScheduleRepository, MashScheduleRepository mashScheduleRepository,
+								  HopLineRepository hopLineRepository, MaltLineRepository maltLineRepository,
+								  MashRestRepository mashRestRepository, RecipeRepository recipeRepository, UnitOfMeasureRepository unitOfMeasureRepository,
+								  YeastLineRepository yeastLineRepository){
 		return (args) -> {
 			hopRepository.deleteAll();
 			yeastRepository.deleteAll();
 			maltRepository.deleteAll();
+			waterProfileRepository.deleteAll();
+			fermentationScheduleRepository.deleteAll();
+			mashScheduleRepository.deleteAll();
+			hopLineRepository.deleteAll();
+			mashRestRepository.deleteAll();
+			yeastLineRepository.deleteAll();
+			maltLineRepository.deleteAll();
+			recipeRepository.deleteAll();
+			unitOfMeasureRepository.deleteAll();
 
 			Map<String,Double> flavorProfile1 = new HashMap<>();
 			flavorProfile1.put("Citrus",5.0);
@@ -48,7 +69,7 @@ public class HopsoftBreweryManagementApplication {
 			flavorProfile1.put("Herbal",0.0);
 			flavorProfile1.put("Spice",2.0);
 			flavorProfile1.put("Resin/Pine",2.0);
-			Hop firstHop = hopRepository.save(new Hop("Citra", 10,15,12.5,"Dual",false,27,flavorProfile1));
+			Hop firstHop = hopRepository.save(new Hop("Citra", 10,15,12.5,HopPurpose.DUAL,false,27,flavorProfile1));
 
 			Map<String,Double> flavorProfile2 = new HashMap<>();
 			flavorProfile2.put("Citrus",3.0);
@@ -60,10 +81,10 @@ public class HopsoftBreweryManagementApplication {
 			flavorProfile2.put("Herbal",0.0);
 			flavorProfile2.put("Spice",4.0);
 			flavorProfile2.put("Resin/Pine",4.0);
-			Hop secondHop = hopRepository.save(new Hop("Saaz",2,5,3.5,"Aroma",true,50,flavorProfile2));
+			Hop secondHop = hopRepository.save(new Hop("Saaz",2,5,3.5, HopPurpose.AROMA,true,50,flavorProfile2));
 
-			Yeast firstYeast = yeastRepository.save(new Yeast("Muntons", "Medium","High","Dry","Ale",8.0,72.0,75.0,73.5,64.0,70.0,67.0));
-			Yeast secondYeast = yeastRepository.save(new Yeast("American Lager", "High","Medium","Liquid","Lager",null,79.0,83.0,81.0,48.0,56.0,52.0));
+			Yeast firstYeast = yeastRepository.save(new Yeast("Muntons", Level.MEDIUM,Level.HIGH, YeastForm.DRY, YeastType.ALE,8.0,72.0,75.0,73.5,64.0,70.0,67.0));
+			Yeast secondYeast = yeastRepository.save(new Yeast("American Lager", Level.HIGH,Level.MEDIUM,YeastForm.LIQUID,YeastType.LAGER,null,79.0,83.0,81.0,48.0,56.0,52.0));
 
 
 			Malt firstMalt = new Malt.MaltBuilder("Two-Row Lager Malt")
@@ -107,9 +128,36 @@ public class HopsoftBreweryManagementApplication {
 			maltRepository.save(firstMalt);
 			maltRepository.save(secondMalt);
 
-			WaterProfile firstWaterProfile = waterProfileRepository.save(new WaterProfile());
-			WaterProfile secondWaterProfile = waterProfileRepository.save(new WaterProfile());
+			WaterProfile firstWaterProfile = waterProfileRepository.save(new WaterProfile("London Water Profile", 52.0,32.0,104.0,32.0,86.0,34.0,6.0));
+			WaterProfile secondWaterProfile = waterProfileRepository.save(new WaterProfile("Dublin Water Profile",118.0,4.0,319.0,54.0,12.0,19.0,5.9));
 
+			UnitOfMeasure lbs = unitOfMeasureRepository.save(new UnitOfMeasure("Pounds"));
+			UnitOfMeasure oz = unitOfMeasureRepository.save(new UnitOfMeasure("Ounces"));
+			UnitOfMeasure pkg = unitOfMeasureRepository.save(new UnitOfMeasure("Package"));
+
+			MaltLine maltLineOne = maltLineRepository.save(new MaltLine(1,firstMalt,6.0 ,lbs));
+			List<MaltLine> maltLines = new ArrayList<>();
+			maltLines.add(maltLineOne);
+
+			HopLine hopLine = hopLineRepository.save(new HopLine(1,firstHop,0.5,oz,60.0,50.0));
+			List<HopLine> hopLines = new ArrayList<>();
+			hopLines.add(hopLine);
+
+			FermentationSchedule fermentationSchedule = fermentationScheduleRepository.save(new FermentationSchedule(10.0, 60.0, 70.0, 65.0, Stage.PRIMARY_FERMENTER));
+			YeastLine yeastLine = yeastLineRepository.save(new YeastLine(1, firstYeast, 1.0, pkg, fermentationSchedule));
+			List<YeastLine> yeastLines = new ArrayList<>();
+			yeastLines.add(yeastLine);
+
+			MashRest mashRest = mashRestRepository.save(new MashRest(RestType.CONVERSION, 150.0, 60.0));
+			List<MashRest> mashRests = new ArrayList<>();
+			mashRests.add(mashRest);
+
+			Date startDate = new Date();
+
+			MashSchedule mashSchedule = mashScheduleRepository.save(new MashSchedule(InfusionType.SINGLE_TEMP_INFUSION,mashRests));
+			Recipe recipe = new Recipe("Three Weisse Guys", Style.AMERICAN_WHEAT, 1.040,1.055,1.047,10.0,13.5,11.75,1.008,
+					1.013,1.010,10.0,30.0,20.0,4.5,6.0,3.0,maltLines,
+					hopLines,yeastLines,firstWaterProfile, Status.NOT_STARTED,mashSchedule,startDate,null);
 
 
 			for(Hop hop: hopRepository.findAll()){
@@ -124,6 +172,8 @@ public class HopsoftBreweryManagementApplication {
 			for(WaterProfile waterProfile: waterProfileRepository.findAll()){
 				logger.info("WaterProfile: " + waterProfile);
 			}
+
+
 		};
 	}
 }
