@@ -1,13 +1,11 @@
 package com.hopsoft.brew.brewing.domain;
 
-import com.hopsoft.brew.brewing.enums.Status;
 import com.hopsoft.brew.brewing.enums.Style;
-import com.hopsoft.brew.ingredients.domain.Malt;
 import com.hopsoft.brew.ingredients.domain.WaterProfile;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -51,23 +49,22 @@ public class Recipe {
 
     private Double colorLowerBound;
 
+    @DBRef
     private List<MaltLine> maltLines;
 
+    @DBRef
     private List<HopLine> hopLines;
 
+    @DBRef
     private List<YeastLine> yeastLines;
 
+    @DBRef
     private WaterProfile waterProfile;
 
-    private Status status;
-
+    @DBRef
     private MashSchedule mashSchedule;
 
-    private Date startDate;
-
-    private Date endDate;
-
-    public Recipe(String recipeName, Style recipeStyle, Double originalGravityLowerBound, Double originalGravityUpperBound, Double nominalOriginalGravity, Double degreesPlatoLowerBound, Double degreesPlatoUpperBound, Double nominalDegreesPlato, Double finalGravityLowerBound, Double finalGravityUpperBound, Double nominalFinalGravity, Double lowerBoundIBUs, Double upperBoundIBUs, Double nominalIBUs, Double nominalColor, Double colorUpperBound, Double colorLowerBound, List<MaltLine> maltLines, List<HopLine> hopLines, List<YeastLine> yeastLines, WaterProfile waterProfile, Status status, MashSchedule mashSchedule, Date startDate, Date endDate) {
+    public Recipe(String recipeName, Style recipeStyle, Double originalGravityLowerBound, Double originalGravityUpperBound, Double nominalOriginalGravity, Double degreesPlatoLowerBound, Double degreesPlatoUpperBound, Double nominalDegreesPlato, Double finalGravityLowerBound, Double finalGravityUpperBound, Double nominalFinalGravity, Double lowerBoundIBUs, Double upperBoundIBUs, Double nominalIBUs, Double nominalColor, Double colorUpperBound, Double colorLowerBound, List<MaltLine> maltLines, List<HopLine> hopLines, List<YeastLine> yeastLines, WaterProfile waterProfile, MashSchedule mashSchedule) {
         this.recipeName = recipeName;
         this.recipeStyle = recipeStyle;
         this.originalGravityLowerBound = originalGravityLowerBound;
@@ -89,10 +86,7 @@ public class Recipe {
         this.hopLines = hopLines;
         this.yeastLines = yeastLines;
         this.waterProfile = waterProfile;
-        this.status = status;
         this.mashSchedule = mashSchedule;
-        this.startDate = startDate;
-        this.endDate = endDate;
     }
 
     public String getId() {
@@ -271,36 +265,12 @@ public class Recipe {
         this.waterProfile = waterProfile;
     }
 
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
     public MashSchedule getMashSchedule() {
         return mashSchedule;
     }
 
     public void setMashSchedule(MashSchedule mashSchedule) {
         this.mashSchedule = mashSchedule;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
     }
 
     @Override
@@ -340,10 +310,7 @@ public class Recipe {
                 ", hopLines=" + hopLines +
                 ", yeastLines=" + yeastLines +
                 ", waterProfile=" + waterProfile +
-                ", status=" + status +
                 ", mashSchedule=" + mashSchedule +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
                 '}';
     }
 }

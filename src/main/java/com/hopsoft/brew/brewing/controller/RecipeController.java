@@ -82,10 +82,7 @@ public class RecipeController {
             recipe.setHopLines(newRecipe.getHopLines());
             recipe.setYeastLines(newRecipe.getYeastLines());
             recipe.setWaterProfile(newRecipe.getWaterProfile());
-            recipe.setStatus(newRecipe.getStatus());
             recipe.setMashSchedule(newRecipe.getMashSchedule());
-            recipe.setStartDate(newRecipe.getStartDate());
-            recipe.setEndDate(newRecipe.getEndDate());
             return recipeService.saveRecipe(recipe);
         }).orElseGet(() -> {
             newRecipe.setId(id);

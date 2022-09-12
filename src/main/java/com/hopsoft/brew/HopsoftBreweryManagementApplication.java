@@ -157,7 +157,7 @@ public class HopsoftBreweryManagementApplication {
 			MashSchedule mashSchedule = mashScheduleRepository.save(new MashSchedule(InfusionType.SINGLE_TEMP_INFUSION,mashRests));
 			Recipe recipe = recipeRepository.save(new Recipe("Three Weisse Guys", Style.AMERICAN_WHEAT, 1.040,1.055,1.047,10.0,13.5,11.75,1.008,
 					1.013,1.010,10.0,30.0,20.0,4.5,6.0,3.0,maltLines,
-					hopLines,yeastLines,firstWaterProfile, Status.NOT_STARTED,mashSchedule,startDate,null));
+					hopLines,yeastLines,firstWaterProfile, mashSchedule));
 
 
 			for(Hop hop: hopRepository.findAll()){
