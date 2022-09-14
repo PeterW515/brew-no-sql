@@ -1,9 +1,11 @@
 package com.hopsoft.brew.brewing.controller;
 
 import com.hopsoft.brew.brewing.assembler.RecipeModelAssembler;
+import com.hopsoft.brew.brewing.domain.HopLine;
 import com.hopsoft.brew.brewing.domain.Recipe;
 import com.hopsoft.brew.brewing.exception.RecipeNotFoundException;
 import com.hopsoft.brew.brewing.service.api.RecipeService;
+import com.hopsoft.brew.ingredients.controller.WaterProfileController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +48,8 @@ public class RecipeController {
     public @ResponseBody
     EntityModel<Recipe> getOne(@PathVariable String id) {
         Recipe recipe = recipeService.findByRecipeId(id).orElseThrow(() -> new RecipeNotFoundException(id));
-        return recipeModelAssembler.toModel(recipe);
+        EntityModel<Recipe> entityModel = recipeModelAssembler.toModel(recipe);
+        return entityModel;
     }
 
     @PostMapping(path = "/recipe")

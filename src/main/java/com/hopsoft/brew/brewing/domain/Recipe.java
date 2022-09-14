@@ -5,6 +5,7 @@ import com.hopsoft.brew.ingredients.domain.WaterProfile;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import java.util.List;
 import java.util.Objects;
@@ -49,19 +50,15 @@ public class Recipe {
 
     private Double colorLowerBound;
 
-    @DBRef
+    @DocumentReference
     private List<MaltLine> maltLines;
-
-    @DBRef
+    @DocumentReference
     private List<HopLine> hopLines;
-
-    @DBRef
+    @DocumentReference
     private List<YeastLine> yeastLines;
-
-    @DBRef
+    @DocumentReference
     private WaterProfile waterProfile;
-
-    @DBRef
+    @DocumentReference
     private MashSchedule mashSchedule;
 
     public Recipe(String recipeName, Style recipeStyle, Double originalGravityLowerBound, Double originalGravityUpperBound, Double nominalOriginalGravity, Double degreesPlatoLowerBound, Double degreesPlatoUpperBound, Double nominalDegreesPlato, Double finalGravityLowerBound, Double finalGravityUpperBound, Double nominalFinalGravity, Double lowerBoundIBUs, Double upperBoundIBUs, Double nominalIBUs, Double nominalColor, Double colorUpperBound, Double colorLowerBound, List<MaltLine> maltLines, List<HopLine> hopLines, List<YeastLine> yeastLines, WaterProfile waterProfile, MashSchedule mashSchedule) {

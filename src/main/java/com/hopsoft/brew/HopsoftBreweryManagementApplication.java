@@ -140,8 +140,10 @@ public class HopsoftBreweryManagementApplication {
 			maltLines.add(maltLineOne);
 
 			HopLine hopLine = hopLineRepository.save(new HopLine(1,firstHop,0.5,oz,60.0,50.0));
+			HopLine hopLine1 = hopLineRepository.save(new HopLine(2, secondHop, 1.0,oz,15.0,25.0));
 			List<HopLine> hopLines = new ArrayList<>();
 			hopLines.add(hopLine);
+			hopLines.add(hopLine1);
 
 			FermentationSchedule fermentationSchedule = fermentationScheduleRepository.save(new FermentationSchedule(10.0, 60.0, 70.0, 65.0, Stage.PRIMARY_FERMENTER));
 			YeastLine yeastLine = yeastLineRepository.save(new YeastLine(1, firstYeast, 1.0, pkg, fermentationSchedule));
